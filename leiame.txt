@@ -1,1 +1,49 @@
+Para utilizar no Windows
+
 baixar e instalar NirCmd e NirFyleTypesMan
+TODO: criar manual para configurar
+
+
+
+Para Linux (Thunar)
+
+Criar ações personalizadas  no menu Editar/Ações personalizadas
+
+
+levando em consideração que os arquivos estão baixados na pasta $HOME/projects/admin-tools e que tenha uma venv python
+no mesmo diretório dentro da pasta .venv
+
+
+Para Juntar PDFs
+
+Nome: Juntar PDFs
+Descrição: Junta vários arquivos PDF em um único arquivo
+Submenu:
+Comando: ~/projects/admin-tools/.venv/bin/python ~/projects/admin-toolS/juntar.py %F
+Condições para aparecer
+Padrão de arquivo: *.pdf
+se a seleção contém: Outros arquivos
+
+
+
+Para Dividir PDFs
+
+Nome: Dividir PDFs
+Submenu:
+Comando: ~/projects/admin-tools/.venv/bin/python ~/projects/admin-tools/dividir.py %F
+Condições para aparecer
+Padrão de arquivo: *.pdf
+se a seleção contém: Outros arquivos
+
+
+
+Para iniciar um servidor HTTP na pasta servindo na porta 8000
+
+Nome: Iniciar Servidor HTTP Aqui
+Submenu:
+Comando: ~/projects/admin-tools/.venv/bin/python ~/projects/admin-tools/httpserver.py %f
+Condições para aparecer
+Padrão de arquivo: *
+Intervalo (*min-máx): *
+se a seleção contém: Diretórios
+

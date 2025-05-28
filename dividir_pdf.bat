@@ -1,2 +1,2 @@
 @echo off
-pythonw "C:\pdf-tools\pdf_tool.py" -s %*
+pythonw "C:\admin-tools\pdf_tool.py" -s %*

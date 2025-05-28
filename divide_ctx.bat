@@ -6,7 +6,7 @@ set "PDF_PATH=%~1"
 set "PDF_PATH="%PDF_PATH%""
 
 REM Executar o script Python com o arquivo PDF e o caminho do diretório como argumentos
-python "c:\pdfmanage\divide.py" %PDF_PATH%
+python "c:\admin-tools\divide.py" %PDF_PATH%
 
 pause
 endlocal
