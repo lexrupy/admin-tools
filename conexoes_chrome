@@ -1,0 +1,4 @@
+#!/bin/bash
+
+while true; do clear; netstat -natp | awk '{print $4, $5, $7}' | grep chrome | column -t; sleep 2; done
+
