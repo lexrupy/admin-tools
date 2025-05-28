@@ -1,0 +1,8 @@
+Windows Registry Editor Version 5.00
+
+[HKEY_CLASSES_ROOT\.pdf\shell\DividirPDF]
+@="Dividir SGP-e Alimentação"
+
+[HKEY_CLASSES_ROOT\.pdf\shell\DividirPDF\command]
+@="\"C:\\dividirsgpe\\divide_ctx.bat\" \"%1\""
+

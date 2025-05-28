@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<actions>
+  <action>
+	  <icon>utilities-terminal</icon>
+	  <name>Abrir terminal aqui</name>
+	  <submenu></submenu>
+	  <unique-id>1692161721784641-1</unique-id>
+	  <command>exo-open --working-directory %f --launch TerminalEmulator</command>
+	  <description>Exemplo de uma ação personalizada</description>
+	  <range></range>
+	  <patterns>*</patterns>
+	  <startup-notify/>
+	  <directories/>
+  </action>
+  <action>
+    <icon>python</icon>
+    <name>Juntar PDFs</name>
+    <unique-id>org.example.JuntarPDFs</unique-id>
+    <command>/home/alexandre/projects/pdfmanage/.venv/bin/python /home/alexandre/projects/pdfmanage/juntar.py %F</command>
+    <description>Junta vários arquivos PDF em um único arquivo</description>
+    <patterns>*</patterns>
+    <directories/>
+    <audio-files/>
+    <image-files/>
+    <other-files/>
+    <text-files/>
+    <video-files/>
+    <executable-files/>
+    <multiple-files/>
+    <selection/>
+  </action>
+  <action>
+    <icon>python</icon>
+    <name>Dividir PDF</name>
+    <unique-id>org.example.DividirPDF</unique-id>
+    <command>/home/alexandre/projects/pdfmanage/.venv/bin/python /home/alexandre/projects/pdfmanage/dividir.py %F</command>
+    <description>Divide um arquivo em páginas</description>
+    <patterns>*.pdf</patterns>
+    <directories/>
+    <audio-files/>
+    <image-files/>
+    <other-files/>
+    <text-files/>
+    <video-files/>
+    <executable-files/>
+    <multiple-files/>
+    <selection/>
+  </action>
+  <action>
+    <icon>python</icon>
+    <name>Dividir PDF Alimentacao</name>
+    <unique-id>org.example.DividirPDFSgpe</unique-id>
+    <command>/home/alexandre/projects/pdfmanage/.venv/bin/python /home/alexandre/projects/pdfmanage/divide.py %F</command>
+    <description>Divide um arquivo PDF em pares de páginas</description>
+    <patterns>*.pdf</patterns>
+    <directories/>
+    <audio-files/>
+    <image-files/>
+    <other-files/>
+    <text-files/>
+    <video-files/>
+    <executable-files/>
+    <multiple-files/>
+    <selection/>
+  </action>
+
+</actions>
+

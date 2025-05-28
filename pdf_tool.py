@@ -21,19 +21,17 @@ def pdf_splitter(path):
         for page in range(npages):
             pdf_writer = PdfFileWriter()
             pdf_writer.addPage(pdf.getPage(page))
-            p_name = page+1
-            output_filename = '{}_p{}.pdf'.format(
-                fname, p_name)
-            
+            p_name = page + 1
+            output_filename = "{}_p{}.pdf".format(fname, p_name)
+
             n = 1
             while os.path.exists(output_filename):
-                output_filename = '{}_p{}({}).pdf'.format(
-                fname, p_name, n)
+                output_filename = "{}_p{}({}).pdf".format(fname, p_name, n)
                 n += 1
 
-            with open(os.path.join(outdir,output_filename), 'wb') as out:
+            with open(os.path.join(outdir, output_filename), "wb") as out:
                 pdf_writer.write(out)
-            print('Created: {}'.format(output_filename))
+            print("Created: {}".format(output_filename))
 
 
 def pdf_merger(output_path, input_paths):
@@ -42,20 +40,22 @@ def pdf_merger(output_path, input_paths):
         pdf_reader = PdfFileReader(path)
         for page in range(pdf_reader.getNumPages()):
             pdf_writer.addPage(pdf_reader.getPage(page))
-    with open(output_path, 'wb') as fh:
+    with open(output_path, "wb") as fh:
         pdf_writer.write(fh)
 
-if args['split']:
-    for file in glob.glob(args['split']):
+
+if args["split"]:
+    for file in glob.glob(args["split"]):
         pdf_splitter(file)
 
     exit(0)
 
-if args['join']:
+if args["join"]:
     import tkinter as tk
     from tkinter import simpledialog
     from tkinter.messagebox import askyesno
-    application_window=tk.Tk()
+
+    application_window = tk.Tk()
     application_window.withdraw()
 
     file_list = []
@@ -64,10 +64,16 @@ if args['join']:
     file_list.sort()
     out_dir = os.path.dirname(file_list[0])
     out_filename = os.path.splitext(os.path.basename(file_list[0]))[0]
-    answer = simpledialog.askstring("Personalizar nome do arquivo de saída", "Informe o nome do arquivo", initialvalue=out_filename+'_junto.pdf')
+    answer = simpledialog.askstring(
+        "Personalizar nome do arquivo de saída",
+        "Informe o nome do arquivo",
+        initialvalue=out_filename + "_junto.pdf",
+    )
     out_filename = os.path.join(out_dir, answer)
     overwite = True
     if os.path.exists(out_filename):
-        ovewrite = askyesno(title="Confirmação", message="O arquivo já existe. Sobrescrever?")
+        ovewrite = askyesno(
+            title="Confirmação", message="O arquivo já existe. Sobrescrever?"
+        )
     if overwite:
         pdf_merger(out_filename, file_list)
