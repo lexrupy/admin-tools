@@ -8,7 +8,7 @@ import os
 class PDFMergeDialog(tk.Toplevel):
     def __init__(self, parent, input_files):
         super().__init__(parent)
-        self.title("Mesclar PDFs")
+        self.title("admin-tools Mesclar PDFs")
         self.input_files = input_files
         self.output_file = "output.pdf"
 

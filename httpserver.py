@@ -32,16 +32,15 @@ def get_local_ips():
             stdout=subprocess.PIPE,
             stderr=subprocess.DEVNULL,
             text=True,
-            check=True
+            check=True,
         )
-        matches = re.findall(r'inet (\d+\.\d+\.\d+\.\d+)/', result.stdout)
+        matches = re.findall(r"inet (\d+\.\d+\.\d+\.\d+)/", result.stdout)
         for ip in matches:
             if ip != "127.0.0.1":
                 ips.append(ip)
     except Exception as e:
         print(f"Erro ao obter IPs via comando 'ip': {e}")
     return ips
-
 
 
 def start_server(server):
@@ -51,6 +50,12 @@ def start_server(server):
         print("Servidor encerrado:", e)
 
 
+def copiar_para_area_de_transferencia(root, texto):
+    root.clipboard_clear()
+    root.clipboard_append(texto)
+    root.update()  # Necessário para que o clipboard funcione fora da janela
+
+
 def create_gui(server, directory, port, ips):
     def stop_server():
         if messagebox.askyesno("Encerrar", "Deseja realmente encerrar o servidor?"):
@@ -58,28 +63,47 @@ def create_gui(server, directory, port, ips):
             root.destroy()
 
     root = tk.Tk()
-    root.title("Servidor HTTP")
+    root.title("admin-tools Servidor HTTP")
     root.geometry("600x400")
 
-
-    tk.Label(root, text="HOSTNAME:"+socket.gethostname(), fg="red").pack()
+    tk.Label(root, text="HOSTNAME:" + socket.gethostname(), fg="red").pack()
 
     label = tk.Label(
         root,
         text=f"Servindo arquivos a partir de:\n{directory}\n\nPorta: {port}",
         padx=20,
         pady=10,
-        justify="left"
+        justify="left",
     )
     label.pack()
 
-    ip_label = tk.Label(root, text="Endereços disponíveis para acesso:", pady=5, font=("Helvetica", 10, "bold"))
+    ip_label = tk.Label(
+        root,
+        text="Endereços disponíveis para acesso:",
+        pady=5,
+        font=("Helvetica", 10, "bold"),
+    )
     ip_label.pack()
 
     for ip in ips:
-        tk.Label(root, text=f"http://{ip}:{port}", fg="blue").pack()
+        # tk.Label(root, text=f"http://{ip}:{port}", fg="blue").pack()
+        url = f"http://{ip}:{port}"
+        frame = tk.Frame(root)
+        frame.pack(pady=2)
 
-    stop_button = tk.Button(root, text="Encerrar servidor", command=stop_server, padx=10, pady=5)
+        label = tk.Label(frame, text=url, fg="blue", anchor="w", width=40)
+        label.pack(side="left", padx=5)
+
+        copiar_btn = tk.Button(
+            frame,
+            text="Copiar",
+            command=lambda t=url: copiar_para_area_de_transferencia(root, t),
+        )
+        copiar_btn.pack(side="left", padx=5)
+
+    stop_button = tk.Button(
+        root, text="Encerrar servidor", command=stop_server, padx=10, pady=5
+    )
     stop_button.pack(pady=15)
 
     root.protocol("WM_DELETE_WINDOW", stop_server)
@@ -87,9 +111,13 @@ def create_gui(server, directory, port, ips):
 
 
 if __name__ == "__main__":
-    parser = argparse.ArgumentParser(description="Simple HTTP server with GUI and custom base path.")
+    parser = argparse.ArgumentParser(
+        description="Simple HTTP server with GUI and custom base path."
+    )
     parser.add_argument("directory", help="Directory to serve files from")
-    parser.add_argument("--port", type=int, default=8000, help="Port to serve on (default: 8000)")
+    parser.add_argument(
+        "--port", type=int, default=8000, help="Port to serve on (default: 8000)"
+    )
     args = parser.parse_args()
 
     if not os.path.isdir(args.directory):
@@ -110,4 +138,3 @@ if __name__ == "__main__":
 
     # Inicia interface gráfica
     create_gui(server, base_path, args.port, ips)
-

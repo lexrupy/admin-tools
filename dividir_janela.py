@@ -80,7 +80,7 @@ def processar_arquivo():
 
 def obter_prefixo():
     root = tk.Tk()
-    root.title("Dividir PDF")
+    root.title("admin-tools Dividir PDF")
 
     global entry_prefixo
     entry_prefixo = tk.Entry(root, width=50)
